@@ -50,16 +50,23 @@ int lex();
 #define RIGHT_PAREN 26
 
 /* main driver */
-void main() {
+void main(int argI, char argC) {
+	if (argI != 2){
+		printf("ERROR. NO FILE \n");
+		return(0);
+	}
 /* Open the input data file and process its contents */
-	if ((in_fp = fopen("front.in", "r")) == NULL)
+	if ((in_fp = fopen(argC)) == NULL)
 		printf("ERROR - cannot open front.in \n");
 	else {
-		while (getline() != EOF){
+		while (read_expression = getline() != EOF){
+		indexLine = 9;
 		getChar();
-		do {
-			lex();
-		} while (nextToken != EOF);
+		if(expession != NULL){
+			do {
+				lex();
+				expr();
+			} while (nextToken != EOF);
 	}
 }
 
