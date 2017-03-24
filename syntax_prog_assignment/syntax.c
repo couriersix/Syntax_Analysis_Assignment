@@ -55,6 +55,7 @@ void main() {
 	if ((in_fp = fopen("front.in", "r")) == NULL)
 		printf("ERROR - cannot open front.in \n");
 	else {
+		while (getline() != EOF){
 		getChar();
 		do {
 			lex();
@@ -62,6 +63,7 @@ void main() {
 	}
 }
 
+}
 /* lookup - a function to lookup operators and parentheses
 and return the token */
 int lookup(char ch) {
@@ -109,7 +111,7 @@ void addChar() {
 }
 
 /* getChar - a function to get the next character of
-input and determine its character class */
+input and determine its character class 
 void getChar() {
 	if ((nextChar = getc(in_fp)) != EOF) {
 		if (isalpha(nextChar))
@@ -121,6 +123,7 @@ void getChar() {
 	else
 		charClass = EOF;
 }
+*/
 
 /* getNonBlank - a function to call getChar until it
 returns a non-
@@ -137,6 +140,7 @@ expressions */
 int lex() {
 	lexLen = 0;
 	getNonBlank();
+	endChar = nextChar;
 	switch (charClass) {
 /* Parse identifiers */
 		case LETTER:
@@ -240,3 +244,7 @@ the next token and parse the next term */
 	}
 	printf("Exit <expr>\n");
 } /* End of function expr */
+
+	void error(){
+		printf("ERROR HAS BEEN CAUGHT AT _. EXPRESSION IS _.\n");
+	}
