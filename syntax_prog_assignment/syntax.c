@@ -20,7 +20,6 @@ int nextToken;
 	size_t expression_length = 0;
 	ssize_t read_expression;
 
-
 FILE *in_fp, *fopen();
 
 /* Function declarations */
@@ -39,6 +38,7 @@ int lex();
 /* Character classes */
 #define LETTER 0
 #define DIGIT 1
+#define NEWLINE 2	
 #define UNKNOWN 99
 
 /* Token codes */
@@ -72,7 +72,7 @@ int main(int argI, char* argC[]){
 			} while (nextToken != EOF);
 	}
 }
-
+}
 }
 /* lookup - a function to lookup operators and parentheses
 and return the token */
@@ -123,7 +123,7 @@ void addChar(){
 //getChar - a function to get the next character of
 //input and determine its character class 
 void getChar(){
-	if ((expression[indexLine] != '/n' && expression[indexLine] != '\0'){
+	if ((expression[indexLine] != '\n' && expression[indexLine] != '\0')){
 		nextChar = expression[indexLine++];
 		if (isalpha(nextChar))
 			charClass = LETTER;
@@ -147,7 +147,7 @@ void getNonBlank(){
 	while (isspace(nextChar))
 		getChar();
 }
-/*
+
 
 /* lex - a simple lexical analyzer for arithmetic
 expressions */
