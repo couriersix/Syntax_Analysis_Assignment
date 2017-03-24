@@ -50,17 +50,17 @@ int lex();
 #define RIGHT_PAREN 26
 
 /* main driver */
-void main(int argI, char argC) {
+void main(int argI, char argC[]) {
 	if (argI != 2){
 		printf("ERROR. NO FILE \n");
-		return(0);
+		exit(0);
 	}
 /* Open the input data file and process its contents */
-	if ((in_fp = fopen(argC)) == NULL)
+	if ((in_fp = fopen(argC[1], "r")) == NULL)
 		printf("ERROR - cannot open front.in \n");
 	else {
-		while (read_expression = getline() != EOF){
-		indexLine = 9;
+		while ((read_expression = getline(&expression, &expression_length, in_fp)) != EOF) {
+		indexLine = 0;
 		getChar();
 		if(expession != NULL){
 			do {
@@ -117,20 +117,24 @@ void addChar() {
 		printf("Error - lexeme is too long \n");
 }
 
-/* getChar - a function to get the next character of
-input and determine its character class 
+//getChar - a function to get the next character of
+//input and determine its character class 
 void getChar() {
-	if ((nextChar = getc(in_fp)) != EOF) {
+	if ((expression[indexLine] != '/n' && expression[indexLine] != '\0'){
+		nextChar = expression[indexLine++];
 		if (isalpha(nextChar))
 			charClass = LETTER;
 		else if (isdigit(nextChar))
 			charClass = DIGIT;
+		else if (nextChar == '\n')
+			charClass = NEWLINE;
 		else charClass = UNKNOWN;
+
 	}
 	else
 		charClass = EOF;
 }
-*/
+
 
 /* getNonBlank - a function to call getChar until it
 returns a non-
