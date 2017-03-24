@@ -12,6 +12,12 @@ char nextChar;
 int lexLen;
 int token;
 int nextToken;
+
+	char nextChar;
+	char endChar;
+	char *expression = NULL;
+	char lexeme;
+
 FILE *in_fp, *fopen();
 
 /* Function declarations */
@@ -19,6 +25,13 @@ void addChar();
 void getChar();
 void getNonBlank();
 int lex();
+
+	void addLine();
+	void getLine();
+	void expr();
+	void error();
+	void term();
+	void factor();
 
 /* Character classes */
 #define LETTER 0
